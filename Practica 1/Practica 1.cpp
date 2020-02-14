@@ -24,6 +24,24 @@ void CrearArchivo();
 
 int main()
 {
+	/*std::cout << "APILAR ELEMENTOS\n";
+	PilaCambio pila;
+	pila.push(new Cambio("Hola", "Ola", true, "Hola", 1, 1));
+	pila.push(new Cambio("Trabajar", "Ola", true, "Trabajar", 1, 1));
+	pila.push(new Cambio("Work", "Ola", true, "Work", 1, 1));
+	pila.push(new Cambio("XD", "Ola", true, "XD", 1, 1));
+
+	pila.mostrar_pila();
+	std::cout << "ELIMINAR TOPE\n";
+
+	
+	std::cout << "ELIMINADO " << pila.pop()->palabra << " \n";
+	std::cout << "ELIMINADO " << pila.pop()->palabra << "\n";
+	pila.mostrar_pila();
+
+	std::cout << "DESTRUIR PILA\n";
+	pila.destruir_pila();
+	pila.mostrar_pila();*/
 	
 	bool Salir = false;
 	do {
