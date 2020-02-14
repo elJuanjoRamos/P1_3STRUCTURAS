@@ -78,6 +78,8 @@ int main()
 			//Eliminar();
 		}
 		else if (opcion == 4) {
+			//m.Cls();
+			//pilaCambio.mostrar_pila();
 			cout<<("\nGracias por su Tiempo....","Hasta la Vista...."); 
 			Salir = true;
 		}
@@ -172,6 +174,12 @@ void CrearArchivo() {
 			cout << "\nIngrese el texto a buscar: ";
 			string buscar = "";
 			cin >> buscar;
+			size_t found = buscar.find(";");
+			vector<string> palabra;
+			palabra.push_back(buscar.substr(0, found)); //palabra a bucar
+
+			palabra.push_back(buscar.substr(found + 1, buscar.size())); // palabra a reemplazar
+			
 			if (lista.Buscar(buscar)) {
 				Limpiar();
 				cout << "\n------------------------------\n";
@@ -179,6 +187,9 @@ void CrearArchivo() {
 				cout << "\n------------------------------\n";
 				system("pause");
 				Limpiar();
+				//GUARDAR PILA
+				pilaCambio.push(new Cambio(palabra[0], palabra[1], false, "", 0, 0));
+				pilaCambio.mostrar_pila();
 			}
 			else {
 				cout << "No se ha detectado coincidencia";
@@ -188,7 +199,7 @@ void CrearArchivo() {
 			
 			string buscar = "";
 			cout << "\n------------------------------\n";
-			cout << "\n| Infrese el nombre del archivo:";
+			cout << "\n| Ingrese el nombre del archivo:";
 			cin >> buscar;
 			cout << "\n------------------------------\n";
 

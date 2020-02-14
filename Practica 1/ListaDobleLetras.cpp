@@ -198,6 +198,7 @@ bool ListaDobleLetras::Buscar(string linea) {
 	int cantidad = 0;
 
 	size_t found = str.find(str1); //Hace split al texto de busqueda
+	
 	if (found != string::npos) {
 
 		coincidencias.push_back(linea.substr(0, found)); //palabra a bucar
