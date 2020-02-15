@@ -243,7 +243,7 @@ void CrearArchivo() {
 			int x = m.wherex();
 			int y = m.wherey();
 			lista.Insertar(key_press, x, y);
-			pilaCambio.push(new Cambio("", "", false, ""+key_press, x, y));
+			//pilaCambio.push(new Cambio("", "", false, ""+key_press, x, y));
 			Limpiar();
 		}
 		key_press = ' ';
