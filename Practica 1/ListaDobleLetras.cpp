@@ -107,12 +107,15 @@ void ListaDobleLetras::Mostrar() {
 		while (actual != NULL)
 		{
 			if (actual->letra == ' ') {
+				//cout << " " << " (" << actual->x << "," << actual->y << ") ";
 				cout << " ";
 			} else if(actual->letra == '\n')
 			{
-				cout << "\n.";
+				//cout << "\n." << " (" << actual->x << "," << actual->y << ") ";
+				cout << "\n";
 			}
 			else {
+				//cout << actual->letra << " (" << actual->x << "," << actual->y << ") ";
 				cout << actual->letra;
 			}//cout << actual->letra;
 			actual = actual->sig;

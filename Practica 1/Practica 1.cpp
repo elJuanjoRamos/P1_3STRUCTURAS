@@ -8,6 +8,7 @@
 #include "ListaDobleLetras.h"
 #include "PilaCambio.h"
 #include <vector>
+#include "PilaRevertido.h"
 
 using namespace std;
 
@@ -18,6 +19,7 @@ string opc = "";
 metodos m;
 ListaDobleLetras lista;
 PilaCambio pilaCambio;
+PilaRevertido pilaRevertido;
 
 
 void CrearArchivo();
@@ -195,6 +197,28 @@ void CrearArchivo() {
 				cout << "No se ha detectado coincidencia";
 			}
 		}
+		else if (key_press == 25) { //Presiono CONTROL Y REHACER
+			if (!pilaRevertido.pilaVacia()) {
+				Cambio* c = pilaRevertido.pop();
+				c->estado = true;
+				pilaCambio.push(c);
+				string buscar = c->buscar + ";" + c->reemplazar;
+				if (lista.Buscar(buscar)) {
+					Limpiar();
+				}
+			}
+		}
+		else if (key_press == 26) { //Presiono CONTROL Z DESHACER
+			if (!pilaCambio.pilaVacia()) {
+				Cambio* c = pilaCambio.pop();
+				c->estado = true;
+				pilaRevertido.push(c);
+				string buscar = c->reemplazar + ";" + c->buscar;
+				if (lista.Buscar(buscar)) {
+					Limpiar();
+				}
+			}
+		}
 		else if(key_press == 19){ //PRESIONO CONTROL S
 			
 			string buscar = "";
@@ -219,6 +243,7 @@ void CrearArchivo() {
 			int x = m.wherex();
 			int y = m.wherey();
 			lista.Insertar(key_press, x, y);
+			pilaCambio.push(new Cambio("", "", false, ""+key_press, x, y));
 			Limpiar();
 		}
 		key_press = ' ';
