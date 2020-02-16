@@ -192,8 +192,43 @@ void ListaDobleLetras::Reordenar() {
 
 }
 
+void ListaDobleLetras::InsertarInicio(char entrada)
+{
+	Nodo* aux = new Nodo(entrada, 0, 0);
+	if (primero != NULL)
+	{
+		primero = aux;
+		ultimo = aux;
+	}
+	else {
+		aux->sig = primero;
+		primero->ant = aux;
+		primero = aux;
+	}
+}
+
+void ListaDobleLetras::InsertarUltimo(char entrada) {
+	Nodo* nuevo = new Nodo(entrada, 0, 0);
+	if (primero == NULL) {
+		primero = nuevo;
+		primero = ultimo;
+	}
+	else {
+		ultimo->sig = nuevo;
+		nuevo->ant = ultimo;
+		ultimo = nuevo;
+	}
+	
+}
+
 
 bool ListaDobleLetras::Buscar(string linea) {
+	//INSERTAR AL INICIO
+	//InsertarInicio(' ');
+	//INSERTAR AL FINAL
+	InsertarUltimo(' ');
+
+
 	vector<string> coincidencias;
 
 	string str = linea;
@@ -204,9 +239,9 @@ bool ListaDobleLetras::Buscar(string linea) {
 	
 	if (found != string::npos) {
 
-		coincidencias.push_back(linea.substr(0, found)); //palabra a bucar
+		coincidencias.push_back(linea.substr(0, found) + " "); //palabra a bucar
 
-		coincidencias.push_back(linea.substr(found + 1, linea.size())); // palabra a reemplazar
+		coincidencias.push_back(linea.substr(found + 1, linea.size()) + " "); // palabra a reemplazar
 
 		Nodo* aux = primero;
 		for (size_t i = 0; i < coincidencias[0].size(); i++)
@@ -229,18 +264,50 @@ bool ListaDobleLetras::Buscar(string linea) {
 		{
 			Reemplazar(trim(coincidencias[0]), trim(coincidencias[1]));
 			contador++;
+			//EliminarPrimero();
+			EliminarFinal();
 			Buscar(trim(linea));
 			return true;
 		}
 		else {
+			//EliminarPrimero();
+			EliminarFinal();
 			return false;
 		}
 	}
 	else {
 		return false;
 	}
+}
+
+void ListaDobleLetras::EliminarPrimero() {
+	if (primero != NULL) {
+		if (primero == ultimo) {
+			primero = NULL;
+			ultimo = NULL;
+		}
+		else {
+			primero = primero->sig;
+			primero->ant = NULL;
+		}
+
+	}
+}
 
 
+void ListaDobleLetras::EliminarFinal()
+{
+	if (primero == NULL) {
+		std::cout << "La lista esta vacía.";
+	}
+	else if (primero == ultimo) {
+		ultimo = NULL;
+		primero = NULL;
+	}
+	else {
+		ultimo = ultimo->ant;
+		ultimo->sig = NULL;
+	}
 }
 
 inline string ListaDobleLetras::trim(string& str)

@@ -21,10 +21,14 @@ public:
     bool NodoInterno(int x, int y);
     void Mostrar();
     void Reordenar();
+    void InsertarInicio(char entrada);
+    void InsertarUltimo(char entrada);
     void LimpiarLista();
     void Eliminar(/*Nodo* n*/ int x, int y);
     void Reemplazar(string letras, string reemplazo);
     bool Buscar(string linea);
+    void EliminarPrimero();
+    void EliminarFinal();
     string trim(string& str);
     int getContador();
     Cambio* getCambio();

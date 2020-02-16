@@ -109,7 +109,7 @@ void Limpiar() {
 void CrearArchivo() {
 	//Limpia la lista para poner nuevos caracteres
 	lista.LimpiarLista();
-	lista.Insertar('.', 0, 4);
+	//lista.Insertar('.', 0, 4);
 	Limpiar();
 
 	//variable para leer datos
