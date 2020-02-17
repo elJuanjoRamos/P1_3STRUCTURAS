@@ -17,6 +17,7 @@ public:
     int contador = 0;
     ListaDobleLetras();
     void Insertar(char l, int x, int y);
+    void Insertar(char l);
     void InsertarReemplazo(char l, int x, int y);
     bool NodoInterno(int x, int y);
     void Mostrar();

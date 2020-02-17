@@ -50,6 +50,29 @@ void ListaDobleLetras::Insertar(char dato, int x1, int y1) {
 		Reordenar();
 	}
 }
+
+/*****************************************************/
+/* METODO QUE INSERTA ELEMENTOS UNICAMENTE AL FINAL, ESTE METODO SE UTLIZA CUANDO SE HACE CARGA DE ARCHIVOS */
+void ListaDobleLetras::Insertar(char dato) {
+	Nodo* nuevo;
+
+	nuevo = new Nodo(dato, 0, 0);
+	if (primero == NULL) {
+		primero = nuevo;
+		primero->sig = NULL;
+		primero->ant = NULL;
+		ultimo = primero;
+	}
+	else {
+		ultimo->sig = nuevo;
+		nuevo->sig = NULL;
+		nuevo->ant = ultimo;
+		ultimo = nuevo;
+		
+	}
+	Reordenar();
+}
+
 /*******************************************************/
 
 /* METODO QUE VERIFICA SI EXISTE UN NODO EN LA POSICION XY EN LA QUE SE ESTA INTENTANDO INSERTAR*/
@@ -111,8 +134,7 @@ void ListaDobleLetras::Mostrar() {
 				cout << " ";
 			} else if(actual->letra == '\n')
 			{
-				//cout << "\n." << " (" << actual->x << "," << actual->y << ") ";
-				cout << "\n";
+				cout << "\n.";
 			}
 			else {
 				//cout << actual->letra << " (" << actual->x << "," << actual->y << ") ";
@@ -133,7 +155,7 @@ void ListaDobleLetras::Eliminar(int pox, int poy) {
 	Nodo* anterior = new Nodo();
 	anterior = NULL;
 	bool encontrado = false;
-	if (primero != NULL) {
+	if (actual != NULL) {
 
 		while (actual != NULL && encontrado != true) {
 
@@ -387,22 +409,21 @@ void ListaDobleLetras::GuardarArchivo(string nombre) {
 	Nodo* aux = primero->sig;
 	string texto = "";
 
-	ofstream fout; //object created **fout**
-	fout.open(nombre+".txt");
-	while (aux != NULL)
+	if (aux != NULL)
 	{
-		if (aux->letra != '\n') {
-			texto = texto + aux->letra;
+		ofstream fout; //object created **fout**
+		fout.open(nombre + ".txt");
+		while (aux != NULL)
+		{
+			fout << aux->letra;
+			aux = aux->sig;
 		}
-		else {
-			fout << texto << endl;
-			texto = "";
-		}
-		aux = aux->sig;
+
+		fout.close();
 	}
 
-	fout.close();
-
+	
+	
 	/*
 	fstream archivo;
 	archivo.open(nombre + ".txt", ios::in);
