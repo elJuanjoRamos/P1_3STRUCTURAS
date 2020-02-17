@@ -121,7 +121,7 @@ void PilaCambio::GenerarGrafica(string nombre) {
 
 	//std::cout << texto;
 	texto = archivoCabeza + nodos + juntarNodos + "{rank=same; " + masNodos + "}}";
-	std::cout << texto;
+	//std::cout << texto;
 	ofs << texto;
 
 	ofs.close();

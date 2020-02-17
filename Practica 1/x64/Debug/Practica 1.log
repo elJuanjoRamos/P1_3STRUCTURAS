@@ -1,2 +1,10 @@
-﻿  PilaCambio.cpp
+﻿  ListaDobleLetras.cpp
+  PilaCambio.cpp
+  PilaRevertido.cpp
+  Practica 1.cpp
+C:\Users\josem\Documents\Universidad de San Carlos de Guatemala\USAC Semestre V\USAC Estructura de Datos\P1_3STRUCTURAS\Practica 1\ListaCircular.h(4,10): warning C4067: símbolos (token) inesperados después de la directiva del preprocesador; se esperaba una nueva línea
+C:\Users\josem\Documents\Universidad de San Carlos de Guatemala\USAC Semestre V\USAC Estructura de Datos\P1_3STRUCTURAS\Practica 1\Practica 1.cpp(156,7): warning C4101: 'strLinea': variable local sin referencia
+C:\Users\josem\Documents\Universidad de San Carlos de Guatemala\USAC Semestre V\USAC Estructura de Datos\P1_3STRUCTURAS\Practica 1\Practica 1.cpp(359,6): warning C4101: 'ascii_value': variable local sin referencia
+C:\Users\josem\Documents\Universidad de San Carlos de Guatemala\USAC Semestre V\USAC Estructura de Datos\P1_3STRUCTURAS\Practica 1\Practica 1.cpp(358,7): warning C4101: 'key_press': variable local sin referencia
+  Generando código...
   Practica 1.vcxproj -> C:\Users\josem\Documents\Universidad de San Carlos de Guatemala\USAC Semestre V\USAC Estructura de Datos\P1_3STRUCTURAS\x64\Debug\Practica 1.exe

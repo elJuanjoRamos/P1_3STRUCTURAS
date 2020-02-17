@@ -108,7 +108,34 @@ int main()
 	return 0;
 }
 
+void Reportes() {
+	int opcion = 0;
+	cout << "\n------------------------------\n";
+	cout << "\n| Reportes:";
+	cout << "\n------------------------------\n";
+	cout << "\n| 1. Lista Doble";
+	cout << "\n| 2. Pila Cambio";
+	cout << "\n| 3. Pila Revertido";
+	cout << "\n| 4. Salir\n";
 
+	while (opcion != 4) {
+		std::cin >> opcion;
+		switch (opcion)
+		{
+		case 1:
+			lista.GenerarGrafica("ListaDobleLetras");
+			break;
+		case 2:
+			pilaCambio.GenerarGrafica("PilaCambio");
+			break;
+		case 3:
+			pilaRevertido.GenerarGrafica("PilaRevertido");
+			break;
+		default:
+			break;
+		}
+	}
+}
 
 
 void Limpiar() {
@@ -234,6 +261,9 @@ void CrearArchivo() {
 					Limpiar();
 				}
 			}
+		}
+		else if (key_press == 3) { //Presiono CONTROL C 
+			Reportes();
 		}
 		else if(key_press == 19){ //PRESIONO CONTROL S
 			

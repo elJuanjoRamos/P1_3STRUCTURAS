@@ -1,11 +1,11 @@
 digraph G {node[shape = box];
-Nodo0 [label =  "Palabra Buscada:  david 
-Reemplazada por: jose
+Nodo0 [label =  "Palabra Buscada:  hola 
+Reemplazada por: hello
 Estado:  No revertido
 Palabra: 
 Posicion: 0-0
-"]Nodo1 [label =  "Palabra Buscada:  hola 
-Reemplazada por: hello
+"]Nodo1 [label =  "Palabra Buscada:  prro 
+Reemplazada por: rafa
 Estado:  No revertido
 Palabra: 
 Posicion: 0-0

@@ -482,7 +482,7 @@ void ListaDobleLetras::GenerarGrafica(string nombre) {
 
 	//std::cout << texto;
 	texto = archivoCabeza + nodos + juntarNodos + "}";
-	std::cout << texto;
+	//std::cout << texto;
 	ofs << texto;
 
 	ofs.close();
