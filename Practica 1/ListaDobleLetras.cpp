@@ -383,7 +383,6 @@ void ListaDobleLetras::Reemplazar(string letras, string reemplazo) {
 	primeroReemplazo = NULL;
 	ultimoReemplazo = NULL;
 	Reordenar();
-v
 }
 
 int ListaDobleLetras::getContador() {

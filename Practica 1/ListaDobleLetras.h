@@ -34,6 +34,7 @@ public:
     int getContador();
     Cambio* getCambio();
     void GuardarArchivo(string texto);
+	void GenerarGrafica(string nombre);
     void limpiarCambio();
     virtual ~ListaDobleLetras();
 };

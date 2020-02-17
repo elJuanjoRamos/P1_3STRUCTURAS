@@ -207,7 +207,7 @@ void CrearArchivo() {
 				Limpiar();
 				//GUARDAR PILA
 				pilaCambio.push(new Cambio(palabra[0], palabra[1], false, "", 0, 0));
-				pilaCambio.mostrar_pila();
+				//pilaCambio.GenerarGrafica("PilaCambio");
 			}
 			else {
 				cout << "No se ha detectado coincidencia";
