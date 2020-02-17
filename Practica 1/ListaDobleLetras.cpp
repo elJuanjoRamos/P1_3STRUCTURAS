@@ -383,6 +383,7 @@ void ListaDobleLetras::Reemplazar(string letras, string reemplazo) {
 	primeroReemplazo = NULL;
 	ultimoReemplazo = NULL;
 	Reordenar();
+v
 }
 
 int ListaDobleLetras::getContador() {
@@ -424,6 +425,70 @@ void ListaDobleLetras::GuardarArchivo(string nombre) {
 
 	
 	
+	/*
+	fstream archivo;
+	archivo.open(nombre + ".txt", ios::in);
+
+	if (archivo.is_open()) {
+		while (aux != NULL)
+		{
+			if (aux->letra != '\n') {
+				texto = texto + aux->letra;
+			}
+			else {
+				archivo << texto << endl;
+			}
+		}
+		archivo.close();
+
+	}
+	else {
+		cout << "no se encontro el archivo";
+	}*/
+}
+
+void ListaDobleLetras::GenerarGrafica(string nombre) {
+	string archivoCabeza = "digraph G {"
+		"node[shape = box];\n";
+
+	string nodos;
+	string juntarNodos;
+
+	std::ofstream ofs(nombre + ".dot", std::ofstream::out);
+
+	Nodo* aux = primero;
+	string texto = "";
+	int contador = 0;
+
+	while (aux != NULL)
+	{
+		if (aux->letra == ' ') {
+			nodos = nodos + "Nodo" + to_string(contador) + " [label = " + '"' + " " + '"' + "];\n";
+		}
+		else if (aux->letra == '\n')
+		{
+			nodos = nodos + "Nodo" + to_string(contador) + " [label = " + '"' + " " + '"' + "];\n";
+		}
+		else {
+			nodos = nodos + "Nodo" + to_string(contador) + " [label = " + '"' + aux->letra + '"' + "];\n";
+		}
+		aux = aux->sig;
+		contador++;
+	}
+
+	for (size_t i = 0; i < contador - 1; i++)
+	{
+		juntarNodos = juntarNodos + "Nodo" + to_string(i) + "->Nodo" + to_string(i + 1) + ";\nNodo" + to_string(i + 1) + "->Nodo" + to_string(i) + ";\n";
+	}
+
+	//std::cout << texto;
+	texto = archivoCabeza + nodos + juntarNodos + "}";
+	std::cout << texto;
+	ofs << texto;
+
+	ofs.close();
+	system("dot -Tjpg -o ListaDobleLetras.png ListaDobleLetras.dot");
+	system("ListaDobleLetras.png");
 	/*
 	fstream archivo;
 	archivo.open(nombre + ".txt", ios::in);
