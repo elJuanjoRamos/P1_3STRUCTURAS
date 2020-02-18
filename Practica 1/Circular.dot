@@ -1,0 +1,5 @@
+digraph G {node[shape = box];
+Nodo1[label = "Nombre: hola.txt 
+Ruta: 
+	-C:\Users\Usuario\Desktop\Practica\hola.txt"]
+Nodo1->Nodo1{rank=same; Nodo1;}}

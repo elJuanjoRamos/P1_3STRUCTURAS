@@ -142,8 +142,8 @@ void Limpiar() {
 	m.Cls(); 
 	puts("Editor Simple v1");
 	puts("Comience a capturar los datos");
-	puts("Presione 'ESC' para terminar");
-	puts("------------------------------------");
+	puts("Presione 'ESC' para terminar, CTRL W: Buscar y reemplazar, CTRL C: Reportes, CTRL S: guardar");
+	puts("---------------------------------------------------------------------------------------------");
 
 	lista.Mostrar();
 }
@@ -159,7 +159,7 @@ void CrearArchivo() {
 	int ascii_value;
 	int espacio = 4;
 	int contadorCaracter = 0;
-
+	bool var = false;
 
 
 	do {
@@ -169,22 +169,26 @@ void CrearArchivo() {
 		//cout << "el ascii"<< ascii_value << "el key"<< key_press;
 		
 		if (ascii_value == -32) {
+			var = true;
 		}
-		else if (ascii_value == 75 && key_press == 'K')
+		else if (ascii_value == 75 && var)
 		{
 			m.gotoxy(m.wherex()-1, m.wherey());
+			var = false;
 		}
-		else if (ascii_value == 72 && key_press == 'H') {
+		else if (ascii_value == 72 && var) {
 
 			m.gotoxy(m.wherex(), m.wherey()-1);
+			var = false;
 		}
-		else if (ascii_value == 80 && key_press == 'P') {
+		else if (ascii_value == 80 && var) {
 
 			m.gotoxy(m.wherex(), m.wherey() + 1);
+			var = false;
 		}
-		else if (ascii_value == 77 && key_press == 'M') {
-
+		else if (ascii_value == 77 && var) {
 			m.gotoxy(m.wherex()+1, m.wherey());
+			var = false;
 		}
 
 		else if (ascii_value == 8) { //presiono backspace o flecha izquierda
@@ -210,10 +214,7 @@ void CrearArchivo() {
 			espacio++;
 		}
 		else if (key_press == 23) { //Presiono Control W
-			/*int x = m.wherex();
-			int y = m.wherey();
-			lista.Insertar('\n', x, y);
-			*/
+			
 			
 			
 			cout << "\nIngrese el texto a buscar: ";
@@ -353,25 +354,33 @@ void ArchivosRecientes() {
 	lista.LimpiarLista();
 	puts("Selector Simple v1");
 	puts("Datos de archivos vistos anteriormente");
-	puts("Presione 'ESC' para terminar");
-	puts("------------------------------------");
+	puts("Presione 'ESC' para terminar, X(Mayus) para generar reporte");
+	puts("-------------------------------------------------------------");
 	char key_press;
 	int ascii_value;
 
 
 	if (!listacircular.esVacia())
 	{
+		puts("\t\t\t\t------------------------------------------------------");
+		puts("\t\t\t\t       Lista de Archivos abiertos recientemente       ");
+		puts("\t\t\t\t------------------------------------------------------");
+
 		listacircular.recorrer();
 		puts(" ");
 		
 
 		string opc = "";
+		puts(" ");
+		puts(" ");
+		
+		
 		if (opc == "")
 		{
 			do
 			{
 				opc = "";
-				cout << "\n" << "\t\t\t" << "    Por favor, ingrese el valor: ";
+				cout << "\n" << "\t\t\t\t" << "    Por favor, ingrese el valor: ";
 				cin >> opc;
 				if (opc == "X") {
 					opc = "100";
@@ -381,40 +390,28 @@ void ArchivosRecientes() {
 		}
 
 		int opcion = atoi(opc.c_str());
-		opc = "";
 		string rutaArchivo = listacircular.buscarArchivo(opcion);
 		if (rutaArchivo != "NULL")
 		{
 			AbrirArchivo(rutaArchivo);
 			CrearArchivo();
 		}
-		else {
-			puts("------------------------------------");
-			puts("        ARCHIVO NO ENCONTRADO       ");
-			puts("------------------------------------");
+		else if(opc == "100"){
+			listacircular.GenerarGrafica("Circular");
+			puts("\t\t\t------------------------------------------");
+			puts("\t\t\t       Grafica generada con exito!!       ");
+			puts("\t\t\t------------------------------------------");
 			system("pause");
 		}
-
-
-		/*do {
-
-		} while (ascii_value == 27 || ascii_value == 88 );
-
-
-
-
-		key_press = _getch();
-		ascii_value = key_press;
-
-		if (ascii_value == 27) //presiono ESC sale del bucle
-		{
-		}
-		else if (ascii_value == 88) {
-			cout << "presiono x";
-		}
 		else {
+			puts("\t\t\t------------------------------------");
+			puts("\t\t\t        ARCHIVO NO ENCONTRADO       ");
+			puts("\t\t\t------------------------------------");
+			system("pause");
+		}
+		opc = "";
 
-		}*/
+	
 
 
 

@@ -287,7 +287,7 @@ bool ListaDobleLetras::Buscar(string linea) {
 			Reemplazar(trim(coincidencias[0]), trim(coincidencias[1]));
 			contador++;
 			//EliminarPrimero();
-			EliminarFinal();
+			//EliminarFinal();
 			Buscar(trim(linea));
 			return true;
 		}
@@ -342,7 +342,88 @@ inline string ListaDobleLetras::trim(string& str)
 
 
 void ListaDobleLetras::Reemplazar(string letras, string reemplazo) {
+	
+	
+	
 	Nodo* aux = primero;
+	Nodo* caracterPrimero;
+	Nodo* caracterUltimo;
+	Nodo* nuevo;
+	string concatenar;
+
+	do
+	{
+		if (aux->letra == letras[0] && ( aux->ant->letra == ' ' || aux->ant->letra == '.' || aux->ant->letra == '\n' || aux->ant->letra == ','))
+		{
+			caracterPrimero = aux;
+			caracterUltimo = aux;
+			
+			while (aux->letra != ' ')
+			{
+				concatenar += aux->letra;
+				if (aux->sig == NULL || aux->sig->letra == ' ')
+				{
+					break;
+				}
+				aux = aux->sig;
+			}
+
+			
+			if (letras == concatenar)
+			{
+				caracterUltimo = aux;
+				while (aux->letra != letras[0])
+				{
+					aux = aux->ant;
+				}
+
+				caracterPrimero = aux;
+				if (caracterPrimero != primero)
+				{
+					caracterPrimero = aux->ant;
+				}
+
+				for (int i = 0; i < reemplazo.size(); i++)
+				{
+					nuevo = new Nodo(reemplazo[i], 0,0);
+
+					caracterPrimero->sig = nuevo;
+					nuevo->ant = caracterPrimero;
+
+					if (i == reemplazo.size() - 1)
+					{
+						if (caracterUltimo != ultimo)
+						{
+							nuevo->sig = caracterUltimo->sig;
+
+							//nuevo->setNextNode(lastCharNode->getNextNode());
+							caracterUltimo->sig->ant = nuevo;
+							//lastCharNode->getNextNode()->setPreviousNode(newNode);
+						}
+						else
+						{
+							ultimo = nuevo;
+						}
+					}
+
+					caracterPrimero = caracterPrimero->sig;
+
+					if (caracterPrimero->ant != NULL && caracterPrimero->ant == primero && caracterPrimero->ant->letra == letras[0])
+					{
+						caracterPrimero->ant->sig= NULL;
+						caracterPrimero->ant = NULL;
+						primero = caracterPrimero;
+					}
+				}
+				aux = caracterPrimero;
+			}
+
+		}
+		aux = aux->sig;
+	} while (aux != NULL);
+	
+	
+	/*Nodo* aux = primero;
 	Nodo* rex;
 
 
@@ -375,13 +456,11 @@ void ListaDobleLetras::Reemplazar(string letras, string reemplazo) {
 		}
 	}
 
-	/*Crea un objeto cambio que contendra el la palabra reemplazo y la original*/
-	cambio = NULL;
-	cambio = new Cambio(
-	);
 
 	primeroReemplazo = NULL;
-	ultimoReemplazo = NULL;
+	ultimoReemplazo = NULL;*/
+	
+
 	Reordenar();
 }
 
@@ -411,7 +490,7 @@ void ListaDobleLetras::GuardarArchivo(string nombre) {
 
 	if (aux != NULL)
 	{
-		ofstream fout; //object created **fout**
+		ofstream fout;
 		fout.open(nombre + ".txt");
 		while (aux != NULL)
 		{
@@ -421,29 +500,6 @@ void ListaDobleLetras::GuardarArchivo(string nombre) {
 
 		fout.close();
 	}
-
-	
-	
-	/*
-	fstream archivo;
-	archivo.open(nombre + ".txt", ios::in);
-
-	if (archivo.is_open()) {
-		while (aux != NULL)
-		{
-			if (aux->letra != '\n') {
-				texto = texto + aux->letra;
-			}
-			else {
-				archivo << texto << endl;
-			}
-		}
-		archivo.close();
-
-	}
-	else {
-		cout << "no se encontro el archivo";
-	}*/
 }
 
 void ListaDobleLetras::GenerarGrafica(string nombre) {
@@ -453,7 +509,7 @@ void ListaDobleLetras::GenerarGrafica(string nombre) {
 	string nodos;
 	string juntarNodos;
 
-	std::ofstream ofs(nombre + ".dot", std::ofstream::out);
+	ofstream ofs(nombre + ".dot", ofstream::out);
 
 	Nodo* aux = primero;
 	string texto = "";
@@ -475,7 +531,7 @@ void ListaDobleLetras::GenerarGrafica(string nombre) {
 		contador++;
 	}
 
-	for (size_t i = 0; i < contador - 1; i++)
+	for (size_t i = 0; i < contador-1; i++)
 	{
 		juntarNodos = juntarNodos + "Nodo" + to_string(i) + "->Nodo" + to_string(i + 1) + ";\nNodo" + to_string(i + 1) + "->Nodo" + to_string(i) + ";\n";
 	}
