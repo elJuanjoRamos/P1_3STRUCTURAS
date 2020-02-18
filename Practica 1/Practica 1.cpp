@@ -258,6 +258,8 @@ void CrearArchivo() {
 				c->estado = true;
 				pilaRevertido.push(c);
 				string buscar = c->reemplazar + ";" + c->buscar;
+				//string buscar = "java;adios" ;
+				
 				if (lista.Buscar(buscar)) {
 					Limpiar();
 				}

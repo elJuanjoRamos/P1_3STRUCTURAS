@@ -293,7 +293,7 @@ bool ListaDobleLetras::Buscar(string linea) {
 		}
 		else {
 			//EliminarPrimero();
-			EliminarFinal();
+			//EliminarFinal();
 			return false;
 		}
 	}
@@ -344,84 +344,79 @@ inline string ListaDobleLetras::trim(string& str)
 void ListaDobleLetras::Reemplazar(string letras, string reemplazo) {
 	
 	
-	
+
 	Nodo* aux = primero;
-	Nodo* caracterPrimero;
-	Nodo* caracterUltimo;
+	Nodo* auxprimero;
+	Nodo* auxultimo;
 	Nodo* nuevo;
 	string concatenar;
-
-	do
-	{
-		if (aux->letra == letras[0] && ( aux->ant->letra == ' ' || aux->ant->letra == '.' || aux->ant->letra == '\n' || aux->ant->letra == ','))
-		{
-			caracterPrimero = aux;
-			caracterUltimo = aux;
-			
-			while (aux->letra != ' ')
-			{
-				concatenar += aux->letra;
-				if (aux->sig == NULL || aux->sig->letra == ' ')
-				{
-					break;
-				}
-				aux = aux->sig;
-			}
-
-			
-			if (letras == concatenar)
-			{
-				caracterUltimo = aux;
-				while (aux->letra != letras[0])
-				{
-					aux = aux->ant;
-				}
-
-				caracterPrimero = aux;
-				if (caracterPrimero != primero)
-				{
-					caracterPrimero = aux->ant;
-				}
-
-				for (int i = 0; i < reemplazo.size(); i++)
-				{
-					nuevo = new Nodo(reemplazo[i], 0,0);
-
-					caracterPrimero->sig = nuevo;
-					nuevo->ant = caracterPrimero;
-
-					if (i == reemplazo.size() - 1)
-					{
-						if (caracterUltimo != ultimo)
-						{
-							nuevo->sig = caracterUltimo->sig;
-
-							//nuevo->setNextNode(lastCharNode->getNextNode());
-							caracterUltimo->sig->ant = nuevo;
-							//lastCharNode->getNextNode()->setPreviousNode(newNode);
-						}
-						else
-						{
-							ultimo = nuevo;
-						}
-					}
-
-					caracterPrimero = caracterPrimero->sig;
-
-					if (caracterPrimero->ant != NULL && caracterPrimero->ant == primero && caracterPrimero->ant->letra == letras[0])
-					{
-						caracterPrimero->ant->sig= NULL;
-						caracterPrimero->ant = NULL;
-						primero = caracterPrimero;
-					}
-				}
-				aux = caracterPrimero;
-			}
-
-		}
-		aux = aux->sig;
-	} while (aux != NULL);
 	
+		do
+		{
+			if (aux->letra == letras[0] && (aux->ant == NULL || aux->ant->letra == ' ' || aux->ant->letra == '.' || aux->ant->letra == ',' || aux->ant->letra == '\n'))
+			{
+				while (aux->letra != ' ')
+				{
+					concatenar += aux->letra;
+					if (aux->letra == NULL || aux->sig->letra == ' ' )
+					{
+						break;
+					}
+					aux = aux->sig;
+				}
+
+				if (letras == concatenar)
+				{
+					auxultimo = aux;
+					while (aux->letra != letras[0])
+					{
+						aux = aux->ant;
+					}
+
+					auxprimero = aux;
+					if (auxprimero != primero)
+					{
+						auxprimero = aux->ant;
+					}
+
+					for (int i = 0; i < reemplazo.size(); i++)
+					{
+						nuevo = new Nodo(reemplazo[i], 0,0);
+
+						auxprimero->sig= nuevo;
+						nuevo->ant = auxprimero;
+
+						if (i == reemplazo.size() - 1)
+						{
+							if (auxultimo != ultimo)
+							{
+								nuevo->sig = auxultimo->sig;
+								auxultimo->sig->ant = nuevo;
+							}
+							else
+							{
+								ultimo = nuevo;
+							}
+						}
+
+						auxprimero = auxprimero->sig;
+
+						if (auxprimero->ant != NULL && auxprimero->ant == primero && auxprimero->ant->letra == letras[0])
+						{
+							auxprimero->ant->sig = NULL;
+							auxprimero->ant = NULL;
+							primero = auxprimero;
+						}
+					}
+					aux = auxprimero;
+				}
+			}
+
+			aux = aux->sig;
+		} while (aux != NULL);
+	
+
+
 	
 	/*Nodo* aux = primero;
 	Nodo* rex;
