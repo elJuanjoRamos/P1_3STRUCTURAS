@@ -243,14 +243,19 @@ void ListaDobleLetras::InsertarUltimo(char entrada) {
 	
 }
 
+bool ListaDobleLetras::Existe() {
+	return ex;
+}
+void ListaDobleLetras::LimpiarEx() {
+	ex = false;
+}
 
-bool ListaDobleLetras::Buscar(string linea) {
+
+void ListaDobleLetras::Buscar(string linea) {
 	//INSERTAR AL INICIO
 	//InsertarInicio(' ');
 	//INSERTAR AL FINAL
-	InsertarUltimo(' ');
-
-
+	
 	vector<string> coincidencias;
 
 	string str = linea;
@@ -286,19 +291,16 @@ bool ListaDobleLetras::Buscar(string linea) {
 		{
 			Reemplazar(trim(coincidencias[0]), trim(coincidencias[1]));
 			contador++;
+			ex = true;
 			//EliminarPrimero();
 			//EliminarFinal();
 			Buscar(trim(linea));
-			return true;
+			
 		}
 		else {
 			//EliminarPrimero();
 			//EliminarFinal();
-			return false;
 		}
-	}
-	else {
-		return false;
 	}
 }
 
@@ -358,7 +360,7 @@ void ListaDobleLetras::Reemplazar(string letras, string reemplazo) {
 				while (aux->letra != ' ')
 				{
 					concatenar += aux->letra;
-					if (aux->letra == NULL || aux->sig->letra == ' ' )
+					if (aux->sig == NULL || aux->sig->letra == ' ')
 					{
 						break;
 					}
@@ -462,6 +464,9 @@ void ListaDobleLetras::Reemplazar(string letras, string reemplazo) {
 int ListaDobleLetras::getContador() {
 	return contador;
 }
+void ListaDobleLetras::limpiarContador() {
+	contador = 0;
+}
 
 /* LIMPIA LA LISTA */
 void ListaDobleLetras::LimpiarLista() {
@@ -506,7 +511,7 @@ void ListaDobleLetras::GenerarGrafica(string nombre) {
 
 	ofstream ofs(nombre + ".dot", ofstream::out);
 
-	Nodo* aux = primero;
+	Nodo* aux = primero->sig;
 	string texto = "";
 	int contador = 0;
 
@@ -539,24 +544,5 @@ void ListaDobleLetras::GenerarGrafica(string nombre) {
 	ofs.close();
 	system("dot -Tjpg -o ListaDobleLetras.png ListaDobleLetras.dot");
 	system("ListaDobleLetras.png");
-	/*
-	fstream archivo;
-	archivo.open(nombre + ".txt", ios::in);
-
-	if (archivo.is_open()) {
-		while (aux != NULL)
-		{
-			if (aux->letra != '\n') {
-				texto = texto + aux->letra;
-			}
-			else {
-				archivo << texto << endl;
-			}
-		}
-		archivo.close();
-
-	}
-	else {
-		cout << "no se encontro el archivo";
-	}*/
+	
 }
